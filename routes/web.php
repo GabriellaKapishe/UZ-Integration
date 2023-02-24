@@ -19,3 +19,4 @@ $router->get('/', function () use ($router) {
 });
 
 Route::post('/save/bill-payment','TransactionController@create');
+Route::get('/get/transaction-type','TransactionController@read');

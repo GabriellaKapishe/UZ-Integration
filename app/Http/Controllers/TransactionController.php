@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Transaction;
+use App\Models\TransactionType;
 
 class TransactionController extends Controller
 {
@@ -94,5 +95,27 @@ class TransactionController extends Controller
           'branch'=>'required',
           'teller'=>'required',
         ]);
+    }
+
+
+    public function read(){
+
+        try{
+            $types = TransactionType::get();
+            return response()->json([
+                "code"=>200,
+                "message"=>'success',
+                "data"=>$types
+  
+              ]);
+        }
+        catch(Exception  $exception)
+        {
+            return response()->json([
+                "code"=>422,
+                "message"=>$exception->getMessage(),
+                "data"=>[]
+            ]);
+        }
     }
 }
